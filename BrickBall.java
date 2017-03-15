@@ -8,8 +8,9 @@ import java.util.Observer;
 import java.util.Observable;
 import java.util.List;
 import java.awt.*;
+import java.applet.*;
 
-public class BrickBall extends Observable
+public class BrickBall extends Observable,Applet
 {
 	private JPanel parent;
 	private Color color;
@@ -18,7 +19,7 @@ public class BrickBall extends Observable
 	private int speedX;
 	private int speedY;
 	public static final int INCREMENT = 2;
-	
+
 
 	/**
 	 *	Creates a balloon with values passed
@@ -36,7 +37,7 @@ public class BrickBall extends Observable
 		speedX=theSpeedX;
 		speedY=theSpeedY;
   	}
-	
+
 	/**
 	 *	Returns the location of the balloon
 	 *	@return returns the location of the balloon
@@ -45,7 +46,7 @@ public class BrickBall extends Observable
 	{
 		return loc;
 	}
-	
+
 	/**
 	 *	Returns the x-coordinate of the balloon
 	 *	@return returns the x-coordinate of the balloon
@@ -54,7 +55,7 @@ public class BrickBall extends Observable
 	{
 		return loc.getX();
 	}
-	
+
 	/**
 	 *	Returns the y-coordinate of the balloon
 	 *	@return returns the y-coordinate of the balloon
@@ -63,7 +64,7 @@ public class BrickBall extends Observable
 	{
 		return loc.getY();
 	}
-	
+
 	/**
 	 *	Returns the color of the balloon
 	 *	@return returns the color of the balloon
@@ -72,12 +73,12 @@ public class BrickBall extends Observable
 	{
 		return color;
 	}
-	
+
 	public void setColor(Color theColor)
 	{
 		color=theColor;
 	}
-	
+
 	/**
 	 *	Returns the radius of the balloon
 	 *	@return returns the radius  of the balloon
@@ -86,7 +87,7 @@ public class BrickBall extends Observable
 	{
 		return radius;
 	}
-	
+
 	/**
 	 *	Returns the diameter of the balloon
 	 *	@return returns the diameter  of the balloon
@@ -95,18 +96,18 @@ public class BrickBall extends Observable
 	{
 		return 2 * radius;
 	}
-	
+
 	/**
 	 *	Changes the location of the balloon
 	 *	@param x the new x-coordinate of the balloon
 	 *	@param y the new y-coordinate of the balloon
 	 */
-	public void setLocation(int x, int y)	
+	public void setLocation(int x, int y)
 	{
 		loc.setX(x);
 		loc.setY(y);
 	}
-	
+
 	/**
 	 *	Changes the x-coordinate of the balloon
 	 *	@param x the new x-coordinate of the balloon
@@ -115,7 +116,7 @@ public class BrickBall extends Observable
 	{
 		loc.setX(x);
 	}
-	
+
 	/**
 	 *	Changes the y-coordinate of the balloon
 	 *	@param y the new y-coordinate of the balloon
@@ -124,7 +125,7 @@ public class BrickBall extends Observable
 	{
 		loc.setY(y);
 	}
-	
+
 	/**
 	 *	Draws the ball in the given graphics context
 	 */
@@ -133,7 +134,7 @@ public class BrickBall extends Observable
 		g.setColor(color);
 		g.fillOval(getX(), getY(), getDiameter(), getDiameter());
 	}
-	
+
 	public void move()
 	{
 		int width = parent.getWidth();
@@ -148,20 +149,20 @@ public class BrickBall extends Observable
 			setX(0);
 			speedX=Math.abs(speedX);
 		}
-		
+
 		int height = parent.getHeight();
 		setY(getY()+speedY);
-		
+
 		if(getY()<0)
 		{
 			setY(0);
 			speedY=Math.abs(speedY);
 		}
-				
+
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	public void incSpeed()
 	{
 		if (speedX == 0)
@@ -169,7 +170,7 @@ public class BrickBall extends Observable
 		else
 			speedX += 5 * Integer.signum(speedX);
 	}
-	
+
 	public void decSpeed()
 	{
 		if (Math.abs(speedX) > 0)
@@ -178,19 +179,19 @@ public class BrickBall extends Observable
 
 	public void incSpeedY()
 	{
-		speedY += 10 * Integer.signum(speedY);		
+		speedY += 10 * Integer.signum(speedY);
 	}
-	
+
 	public void setSpeedX(int x)
 	{
 		speedX=x;
 	}
-	
+
 	public void setSpeedY(int y)
 	{
 		speedY=y;
 	}
-	
+
 	public void setSpeedXSign(int x)
 	{
 		if(x<0)
@@ -198,7 +199,7 @@ public class BrickBall extends Observable
 		else if(x>0)
 			speedX=Math.abs(speedX);
 	}
-	
+
 	public void setSpeedYSign(int y)
 	{
 		if(y<0)
@@ -206,12 +207,12 @@ public class BrickBall extends Observable
 		else if(y>0)
 			speedY=Math.abs(speedY);
 	}
-	
+
 	public void deflect(double deflection)
 	{
 		speedX += deflection * (speedX + 1);
 	}
-	
+
 	public void stop()
 	{
 		speedX=0;
