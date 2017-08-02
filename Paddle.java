@@ -8,16 +8,15 @@ import java.util.Observer;
 import java.util.Observable;
 import java.util.List;
 import java.awt.*;
-import java.applet.*;
 
-public class Paddle extends Observable,Applet
+public class Paddle extends Observable
 {
 	private JPanel parent;
 	private Color color;
 	private int xPos;
 	private int height;
 	private int width;
-
+	
 	/**
 	 *	Creates a balloon with values passed
 	 *	@param col the color of the balloon
@@ -32,9 +31,9 @@ public class Paddle extends Observable,Applet
 		xPos=x;
 		height=theHeight;
 		width=theWidth;
-
+		
 	}
-
+	
 	/**
 	 *	Returns the location of the balloon
 	 *	@return returns the location of the balloon
@@ -43,7 +42,7 @@ public class Paddle extends Observable,Applet
 	{
 		return xPos;
 	}
-
+	
 	public int getHeight()
 	{
 		return height;
@@ -56,19 +55,19 @@ public class Paddle extends Observable,Applet
 	{
 		return color;
 	}
-
+	
 	public void setColor(Color theColor)
 	{
 		color=theColor;
 	}
-
+	
 
 	/**
 	 *	Changes the location of the balloon
 	 *	@param x the new x-coordinate of the balloon
 	 *	@param y the new y-coordinate of the balloon
 	 */
-	public void setX(int x)
+	public void setX(int x)	
 	{
 		if(x<width/2)
 			xPos=width/2;
@@ -77,7 +76,7 @@ public class Paddle extends Observable,Applet
 		else
 			xPos=x;
 	}
-
+	
 	public boolean isInside(int x, int y)
 	{
 		if(xPos-width/2>x)
@@ -89,30 +88,30 @@ public class Paddle extends Observable,Applet
 		else
 			return true;
 	}
-
+	
 	public double getDeflection(int x)
 	{
 		return 1.0 * (x - xPos) * (2.0/width);
 	}
-
+	
 	/**
 	 *	Draws the ball in the given graphics context
 	 */
 	public void draw(Graphics g)
 	{
 		int panelHeight = parent.getHeight();
-
+		
 		g.setColor(color);
 		g.fillRect(xPos-(width/2), panelHeight-height, width, height);
 	}
-
+	
 	public void move()
 	{
-
+		
 		setChanged();
 		notifyObservers();
 	}
-
+	
 	/**
 	 *	Returns all the information about the balloon
 	 *	@return returns a string containing the balloon's color,

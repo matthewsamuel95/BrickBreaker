@@ -1,14 +1,13 @@
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.Timer;
-import java.applet.*;
 
-public class Clock extends Applet implements ActionListener
+public class Clock implements ActionListener
 {
 	private Timer timer;
 	private int timeIncr;  // in milliseconds
 	private BrickBallFrame frame;
-
+	
 	/**
 	 *	Creates a timer object with the given data
 	 *	@param theBallonField the listener for the timer
@@ -19,8 +18,8 @@ public class Clock extends Applet implements ActionListener
 		frame = theFrame;
 		timeIncr = dt;
 		timer = new Timer(timeIncr, this);
-	}
-
+	}  
+	
 	/**
 	 *	Starts the timer
 	 */
@@ -28,7 +27,7 @@ public class Clock extends Applet implements ActionListener
 	{
 		timer.start();
 	}
-
+	
 	/**
 	 *	Stops the timer
 	 */
@@ -36,7 +35,7 @@ public class Clock extends Applet implements ActionListener
 	{
 		timer.stop();
 	}
-
+	
 	/**
 	 *	Called automatically when the timer fires.
 	 *	@param e contains the action event
